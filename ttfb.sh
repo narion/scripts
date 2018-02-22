@@ -28,4 +28,4 @@ function clean_trailing_slash() {
     echo $1 | sed 's~/$~~g' | sed -e 's/\//-/g'
 }
 
-echo $(date "+%Y-%m-%d %H:%M:%S") $1 $(ttfb $1) | tr '\n' ' ' | sed 's/$/\n/g' >> ~/scripts/logs/$(date "+%Y-%m-%d")-$(clean_url $1).log
+echo $(date "+%Y-%m-%d %H:%M:%S") $1 $(ttfb $1) | tr '\n' ' ' | sed 's/$/\n/g' >> "$HOME/scripts/logs/$(date "+%Y-%m-%d")-$(clean_url $1).log"
