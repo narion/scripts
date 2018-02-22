@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# file: monitor-ttfb.sh
+# file: ttfb.sh
 # note: to deploy this, add the following line to your crontab
 # * 10-17 * * 1-5 /path/to/monitor-ttfb.sh "https://domain-to-monitor.com" /path/to/log-file.log
 # the above cronjob runs every minute from 10AM to 5PM only on weekdays
+
+# Folder structure must be in place prior to use scripts & logs directories in running users /home
 
 function ttfb() {
     curl -o /dev/null \
@@ -26,4 +28,4 @@ function clean_trailing_slash() {
     echo $1 | sed 's~/$~~g' | sed -e 's/\//-/g'
 }
 
-echo $(date "+%Y-%m-%d %H:%M:%S") $1 $(ttfb $1) | tr '\n' ' ' | sed 's/$/\n/g' >> $(date "+%Y-%m-%d")-$(clean_url $1).log
+echo $(date "+%Y-%m-%d %H:%M:%S") $1 $(ttfb $1) | tr '\n' ' ' | sed 's/$/\n/g' >> ~/scripts/logs/$(date "+%Y-%m-%d")-$(clean_url $1).log
